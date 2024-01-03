@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 export const AppWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  .app,
+  position: relative;
   .page {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    padding: 80px 0 0;
+    min-height: calc(100vh - 160px);
   }
 `;
