@@ -8,6 +8,11 @@ function handleData(ctx, data = null, code = 200, message = 'success') {
   ctx.body = response;
 }
 
+function handleError(ctx, error) {
+  const msg = error.errors[0].message;
+  handleData(ctx, null, 500, msg);
+}
+
 function crptyContent(content) {
   const salt = bcrypt.genSaltSync(10);
   // hash保存的是 密文
@@ -17,5 +22,6 @@ function crptyContent(content) {
 
 module.exports = (app) => {
   app.context['handleData'] = handleData;
+  app.context['handleError'] = handleError
   app.context['crptyContent'] = crptyContent;
 };
