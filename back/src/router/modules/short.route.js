@@ -1,11 +1,12 @@
 const Router = require('koa-router');
 const shortController = require('../../controller/short.controller');
-const { shortValidator } = require('../../middleware/short.middleware');
+const {
+  url2shortByHash,
+  canShortUsed,
+} = require('../../middleware/short.middleware');
 const router = new Router({ prefix: '/short' });
 
-router.get('/list', shortController.getShortList);
-router.get('/get', shortController.getShortById);
-
-router.post('/add', shortValidator, shortController.craeteShort);
+router.post('/create', url2shortByHash, shortController.craeteShort);
+router.get('/analysis', canShortUsed, shortController.analysisShort);
 
 module.exports = router.routes();

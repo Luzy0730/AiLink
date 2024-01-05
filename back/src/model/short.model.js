@@ -10,22 +10,37 @@ const Short = seq.define(
       comment: '短链地址中的key',
     },
     url: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(512),
       allowNull: false,
-      unique: true,
       comment: '原始地址',
     },
     status: {
       type: DataTypes.TINYINT(4),
       allowNull: false,
       defaultValue: 1,
-      comment: '状态',
+      comment: '状态 1: 启用 0：停用',
     },
     createId: {
       field: 'create_id',
       type: DataTypes.INTEGER(11),
-      allowNull: false,
       comment: '创建者id',
+    },
+    visitCount: {
+      field: 'visit_count',
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: 0,
+      comment: '访问次数',
+    },
+    password: {
+      field: 'password',
+      type: DataTypes.STRING(8),
+      comment:'访问密码'
+    },
+    expireTime: {
+      field: 'expire_time',
+      type: DataTypes.DATE,
+      comment: '过期时间',
     },
   },
   {
@@ -34,6 +49,6 @@ const Short = seq.define(
   }
 );
 
-Short.sync({ force: true });
+// Short.sync({ force: true });
 
 module.exports = Short;
