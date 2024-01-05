@@ -11,6 +11,7 @@ const seq = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PWD, {
   host: MYSQL_HOST,
   port: MYSQL_PORT,
   dialect: 'mysql',
+  timezone: '+08:00',
   pool: {
     min: 0, // 最小连接数
     max: 5, // 最大链接数
