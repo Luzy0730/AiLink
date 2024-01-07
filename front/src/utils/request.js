@@ -2,7 +2,8 @@ import axios from 'axios';
 import { message } from 'antd';
 
 const request = axios.create({
-  baseURL: 'http://localhost:10200',
+  // baseURL: 'http://localhost:10200',
+  baseURL: 'http://api.dl.guaiguaizhanhao.cn',
   timeout: 60000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

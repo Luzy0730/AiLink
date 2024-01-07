@@ -20,8 +20,8 @@ const Short = seq.define(
       defaultValue: 1,
       comment: '状态 1: 启用 0：停用',
     },
-    createId: {
-      field: 'create_id',
+    userId: {
+      field: 'user_id',
       type: DataTypes.INTEGER(11),
       comment: '创建者id',
     },

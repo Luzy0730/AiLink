@@ -11,9 +11,16 @@ class ShortService {
     return res ? res.dataValues : null;
   }
   async createShort(option) {
-    const { short, url, password } = option;
+    const { short, url, password, userId } = option;
     const fieldOpt = { short, url };
     password && Object.assign(fieldOpt, { password });
+    if (userId) {
+      Object.assign(fieldOpt, { userId });
+    } else {
+      let now = new Date();
+      let expireTime = new Date(now.getTime() + 30 * 60000);
+      Object.assign(fieldOpt, { expireTime });
+    }
     const res = await ShortModel.create(fieldOpt);
     return res ? res.dataValues : null;
   }
