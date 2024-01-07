@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FooterWrapper = styled.div`
   width: 100%;
+  height: 135px;
   box-shadow: 0 0px 20px 0 #ccc;
   background: #f2f3f5;
   .content {

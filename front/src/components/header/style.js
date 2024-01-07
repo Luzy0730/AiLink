@@ -14,6 +14,9 @@ export const HeaderWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    h1 {
+      cursor: pointer;
+    }
     button {
       margin-left: 0.16rem;
     }

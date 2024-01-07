@@ -6,12 +6,13 @@ const {
   shortFormateError,
   shortIsNotExist,
   shortIsExpire,
+  shortIsProtected
 } = require('../constant/err.type');
 const ShortService = require('../service/short.service');
 
 // 检验短链是否失效
 const canShortUsed = async (ctx, next) => {
-  let { short } = ctx.request.query;
+  let { short, pwd } = ctx.request.query;
   if (!short) {
     ctx.app.emit('error', shortFormateError, ctx);
     return;
@@ -22,18 +23,20 @@ const canShortUsed = async (ctx, next) => {
       ctx.app.emit('error', shortIsNotExist, ctx);
       return;
     } else {
+      if (res.password && pwd !== res.password) {
+        ctx.app.emit('error', shortIsProtected, ctx);
+        return;
+      }
       if (res.expireTime && new Date() > new Date(res.expireTime)) {
         ctx.app.emit('error', shortIsExpire, ctx);
         await ShortService.deleteShort({ id: res.id });
         return;
-      } else {
-        ctx.state.short = res;
       }
+      ctx.state.short = res;
     }
   } catch (error) {
     ctx.handleError(ctx, error);
   }
-
   await next();
 };
 

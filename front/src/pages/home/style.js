@@ -14,6 +14,7 @@ export const HomeWrapper = styled.div`
       text-align: center;
     }
     .search {
+      position: relative;
       border: 1px solid #dce3f2;
       width: 790px;
       background-color: #fff;
@@ -32,12 +33,89 @@ export const HomeWrapper = styled.div`
         height: 100%;
         box-shadow: none;
       }
+      .result {
+        position: absolute;
+        left: 0;
+        top: 120%;
+        border: 1px solid #dce3f2;
+        padding: 20px 32px 16px;
+        width: 780px;
+        background-color: #fff;
+        z-index: 199;
+        &_top {
+          display: flex;
+          align-items: center;
+          .ant-qrcode {
+            padding: 0 !important;
+            border-radius: 0 !important;
+            margin-right: 20px;
+            flex-shrink: 0;
+          }
+          .linkinfo {
+            display: flex;
+            flex-direction: column;
+
+            .top-link {
+              display: flex;
+              align-items: center;
+              a {
+                color: #3464e0;
+                font-size: 12px;
+              }
+              .copy_icon {
+                margin-left: 12px;
+                color: #666;
+                cursor: pointer;
+                &:hover {
+                  color: #3464e0;
+                }
+                &:active {
+                  filter: brightness(0.5);
+                }
+              }
+              .linkborder {
+                width: 1px;
+                height: 20px;
+                background-color: #ebecf3;
+                margin: 0 24px;
+              }
+              .linkicon {
+
+              }
+              .linkitem {
+                font-size: 12px;
+                margin-left: 8px;
+              }
+            }
+            .origin-link {
+              margin-top: 10px;
+              width: 240px;
+              color: #c5c7ce;
+              font-size: 12px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+        }
+        &_bottom {
+          margin-top: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 14px;
+          color: #303659;
+        }
+      }
     }
     .extra {
       width: 844px;
       margin: 40px auto 0;
       display: flex;
       gap: 24px;
+      input {
+        box-shadow: none;
+      }
     }
   }
   .ad {
@@ -66,8 +144,10 @@ export const HomeWrapper = styled.div`
         justify-content: space-between;
         padding: 0 100px;
         .display-item {
+          width: 50%;
           margin-top: 60px;
           display: flex;
+          justify-content: center;
           img {
             width: 80px;
             height: 80px;

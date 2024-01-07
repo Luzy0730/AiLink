@@ -10,7 +10,7 @@ const Short = seq.define(
       comment: '短链地址中的key',
     },
     url: {
-      type: DataTypes.STRING(512),
+      type: DataTypes.STRING(1024),
       allowNull: false,
       comment: '原始地址',
     },
@@ -35,7 +35,7 @@ const Short = seq.define(
     password: {
       field: 'password',
       type: DataTypes.STRING(8),
-      comment:'访问密码'
+      comment: '访问密码'
     },
     expireTime: {
       field: 'expire_time',

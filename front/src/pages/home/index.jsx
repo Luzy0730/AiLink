@@ -1,19 +1,63 @@
-import React, { memo } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import { HomeWrapper } from './style'
 import { LockOutlined } from '@ant-design/icons';
+import { createShort } from '@/apis/short'
+import Result from './c-cpns/result/index';
 import { Input, Button } from 'antd';
 const Home = memo(() => {
+
+  const [dlInfo, setDlInfo] = useState({
+    isShow: false,
+    hasExpire: true,
+    short: '',
+    url: '',
+    visitCount: 0,
+    password: undefined
+  })
+
+  const [shortParams, setShortParams] = useState({
+    url: '', password: ''
+  })
+  const [loadings, setLoadings] = useState([false]);
+  const enterLoading = (index, state = true) => {
+    setLoadings(preLoadings => {
+      const newLoadings = [...preLoadings]
+      newLoadings[index] = state
+      return newLoadings
+    })
+  }
+
+  const generateShort = () => {
+    enterLoading(0)
+    createShort(shortParams).then(res => {
+      setDlInfo(preDlInfo => ({
+        ...preDlInfo,
+        ...res.data,
+        password: res.data.password ? res.data.password : undefined,
+        isShow: true,
+      }))
+      console.log(dlInfo)
+    }).catch(err => { }).finally(() => {
+      enterLoading(0, false)
+    })
+  }
+
+  const closeResult = () => {
+    setDlInfo({ ...dlInfo, isShow: false })
+  }
+
   return (
     <HomeWrapper>
       <div className='main'>
         <h1>简单易用的渠道短链接</h1>
         <div className='search'>
-          <Input className='search_input' placeholder="请输入 http:// 或 https:// 开头的网址" />
-          <Button type="primary">生成短链接</Button>
+          <Input className='search_input' value={shortParams.url} onChange={(event) => setShortParams({ ...shortParams, url: event.target.value })} placeholder="请输入 http:// 或 https:// 开头的网址" />
+          <Button type="primary" onClick={generateShort} loading={loadings[0]}>生成短链接</Button>
+          {dlInfo.isShow && <Result dlInfo={dlInfo} closeResult={closeResult} />}
         </div>
         <div className='extra'>
           <Input addonBefore="http://dl.guaiguaizhanhao.cn/" placeholder="自定义链接（可选）" />
-          <Input addonBefore={<LockOutlined />} placeholder="密码（可选）" />
+          <Input value={shortParams.password} onChange={(event) => setShortParams({ ...shortParams, password: event.target.value })} addonBefore={<LockOutlined />} placeholder="密码（可选）" />
         </div>
       </div>
       <div className='ad'>
