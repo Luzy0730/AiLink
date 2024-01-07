@@ -1,14 +1,14 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-const Home = React.lazy(() => import('@/pages/home/index.jsx'));
+import Home from '@/pages/home/index.jsx';
+import Link from '@/pages/link/index.jsx';
 const routes = [
   {
     path: '/',
     element: <Home />,
   },
   {
-    path: '/*',
-    element: <Navigate to="/" />,
+    path: '/:short',
+    element: <Link />,
   },
 ];
 

@@ -9,7 +9,10 @@ function handleData(ctx, data = null, code = 200, message = 'success') {
 }
 
 function handleError(ctx, error) {
-  const msg = error.errors[0].message;
+  const sqlError = error.original.sqlMessage
+  const normalError = error.errors ? error.errors[0]?.message : null
+  const msg = normalError || sqlError || '服务出错';
+  ctx.status = 500;
   handleData(ctx, null, 500, msg);
 }
 
