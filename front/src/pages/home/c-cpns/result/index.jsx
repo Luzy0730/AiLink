@@ -10,13 +10,25 @@ const Result = memo((props) => {
     const sl = `短链接：${short}`
     const pw = dlInfo.password ? `\n密码：${dlInfo.password}` : ''
     const bz = '\n来自AiLink的分享'
-    navigator.clipboard.writeText(`${sl}${pw}${bz}`)
-      .then(() => {
-        message.success('已复制到粘贴板');
-      })
-      .catch((error) => {
-        message.error('复制功能出错');
-      });
+    const textToCopy = `${sl}${pw}${bz}`
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          message.success('已复制到粘贴板');
+        })
+        .catch((error) => {
+          message.error('复制功能出错');
+        });
+    } else {
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("Copy");
+      textArea.remove();
+      message.success('已复制到粘贴板');
+    }
+
   }
 
   useEffect(() => {
