@@ -1,5 +1,5 @@
 import React, { memo, useLayoutEffect, useState } from 'react'
-import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import NotFound from './c-cpns/notfound/index'
 import Protected from './c-cpns/protected/index'
 import { LinkWrapper } from './style'
@@ -27,7 +27,7 @@ const Link = memo(() => {
           break;
       }
     })
-  }, [params])
+  }, [params, location.search])
 
   return (
     <LinkWrapper>

@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { HomeWrapper } from './style'
 import { LockOutlined } from '@ant-design/icons';
 import { createShort } from '@/apis/short'

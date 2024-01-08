@@ -109,7 +109,7 @@ export const HomeWrapper = styled.div`
       }
     }
     .extra {
-      width: 844px;
+      width: 780px;
       margin: 40px auto 0;
       display: flex;
       gap: 24px;
