@@ -1,4 +1,3 @@
-const { Sequelize } = require('sequelize');
 const ShortModel = require('../model/short.model');
 class ShortService {
   async getShortInfo({ id, url, short }, where = {}) {
