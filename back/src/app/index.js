@@ -4,7 +4,7 @@ const cors = require('koa2-cors');
 
 const createRouter = require('../router');
 
-const createMiddleware = require('../middleware');
+const createRetHandler = require('./retHandler');
 
 const errHandler = require('./errHandler');
 
@@ -15,7 +15,7 @@ app.use(cors())
 app.use(bodyparser());
 
 app.on('error', errHandler);
-createMiddleware(app);
+createRetHandler(app);
 createRouter(app);
 
 module.exports = app;
