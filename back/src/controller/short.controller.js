@@ -14,7 +14,6 @@ class ShortrController {
   // 短链解析
   async analysisShort(ctx, context) {
     const short = ctx.state.short;
-    ShortService.updateShort({ visitCount: short.visitCount + 1 }, short.id)
     ctx.handleData(ctx, short.url);
   }
 }

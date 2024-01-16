@@ -1,6 +1,6 @@
-const short = require('./modules/short.route');
-const user = require('./modules/user.route');
-const routesFns = [short, user];
+const frontShort = require('./modules/front.short.route');
+const frontUser = require('./modules/front.user.route');
+const frontRoutesFns = [frontShort, frontUser];
 module.exports = function createRouter(app) {
-  routesFns.forEach((routesFn) => app.use(routesFn));
+  frontRoutesFns.forEach((routesFn) => app.use(routesFn));
 };

@@ -9,9 +9,9 @@ function handleData(ctx, data = null, code = 200, message = 'success') {
 }
 
 function handleError(ctx, error) {
-  const sqlError = error.original?.sqlMessage
-  const normalError = error.errors ? error.errors[0]?.message : null
-  const msg = normalError || sqlError || '服务出错';
+  const sqlError = error.original?.sqlMessage;
+  const normalError = error.errors ? error.errors[0]?.message : null;
+  const msg = error.msg || normalError || sqlError || '服务出错';
   ctx.status = 500;
   handleData(ctx, null, 500, msg);
 }
@@ -25,6 +25,6 @@ function crptyContent(content) {
 
 module.exports = (app) => {
   app.context['handleData'] = handleData;
-  app.context['handleError'] = handleError
+  app.context['handleError'] = handleError;
   app.context['crptyContent'] = crptyContent;
 };
