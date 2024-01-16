@@ -14,6 +14,12 @@ const User = seq.define(
       allowNull: false,
       comment: '密码',
     },
+    state: {
+      type: DataTypes.TINYINT(4),
+      allowNull: false,
+      defaultValue: "1",
+      comment: '状态 1: 启用 0：停用',
+    },
   },
   {
     createdAt: 'create_time',
