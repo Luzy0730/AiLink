@@ -19,17 +19,11 @@ const Header = memo(() => {
     dispatch(setShowLoginModal(true))
   }
 
-  const handleCharge = () => {
-    dispatch(setIsLoginMode(true))
-    dispatch(setShowLoginModal(true))
-  }
-
   return (
     <HeaderWrapper>
       <div className='content'>
         <h1 onClick={() => navigate('/')}>AiLink</h1>
         <div>
-          <Button type="primary" onClick={handleCharge}>充值</Button>
           <Button type="primary" onClick={handleSignin}>注册</Button>
           <Button onClick={handleLogin}>登录</Button>
         </div>
