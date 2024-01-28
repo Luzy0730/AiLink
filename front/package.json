@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "start:prod": "craco start --mode production",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -45,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "craco-plugin-env": "^1.0.5"
   }
 }

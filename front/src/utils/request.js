@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { message } from 'antd';
 
+console.log(process.env)
 const request = axios.create({
-  // baseURL: 'http://localhost:10200',
-  baseURL: 'http://api.dl.guaiguaizhanhao.cn',
+  baseURL: process.env.REACT_APP_FRONT_URL,
   timeout: 60000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
