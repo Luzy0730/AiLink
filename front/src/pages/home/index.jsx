@@ -56,7 +56,7 @@ const Home = memo(() => {
           {dlInfo.isShow && <Result dlInfo={dlInfo} closeResult={closeResult} />}
         </div>
         <div className='extra'>
-          <Input value={shortParams.short} onChange={(event) => setShortParams({ ...shortParams, short: event.target.value })} addonBefore="http://dl.guaiguaizhanhao.cn/" placeholder="自定义链接（可选）" />
+          <Input value={shortParams.short} onChange={(event) => setShortParams({ ...shortParams, short: event.target.value })} addonBefore="http://dl.onlycub.top/" placeholder="自定义链接（可选）" />
           <Input value={shortParams.password} onChange={(event) => setShortParams({ ...shortParams, password: event.target.value })} addonBefore={<LockOutlined />} placeholder="密码（可选）" />
         </div>
       </div>
