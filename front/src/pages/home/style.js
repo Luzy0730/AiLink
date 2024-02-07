@@ -2,8 +2,6 @@ import styled from 'styled-components';
 export const HomeWrapper = styled.div`
   .main {
     margin: 0 auto;
-    width: 0;
-    min-width: 1200px;
     padding: 40px 0 80px;
     h1 {
       color: #303659;
