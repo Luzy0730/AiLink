@@ -16,11 +16,10 @@ const Link = memo(() => {
       window.location.replace(res.data)
     }).catch(error => {
       switch (error.data?.code) {
-        case '10003':
         case '10004':
           setLinkState(1);
           break;
-        case '10005':
+        case '10001':
           setLinkState(2)
           break;
         default:

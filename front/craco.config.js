@@ -23,17 +23,12 @@ module.exports = {
       webpackConfig.optimization.splitChunks = {
         cacheGroups: {
           main: {
-            name: "main",
             chunks: "all",
             minChunks: 2, // 至少被两个模块引入
             priority: -20,
             reuseExistingChunk: true,
           },
         },
-      };
-      // 对于异步模块进行配置
-      webpackConfig.optimization.runtimeChunk = {
-        name: 'runtime',
       };
 
       webpackConfig.plugins.push(
