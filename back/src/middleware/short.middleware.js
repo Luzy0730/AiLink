@@ -2,7 +2,7 @@ const murmurhash = require('murmurhash-js');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const rd = require('../db/db_redis');
-const { JWT_SECRET } = require('../config/config_default');
+const { JWT_SECRET, SHORT_EXPIRT_TIME } = require('../config/config_default');
 
 const { string10to62 } = require('../utils/index');
 const {
@@ -61,9 +61,9 @@ const canShortUsed = async (ctx, next) => {
 
     async function isAllow(st) {
       // 是否过期
-      if (st.expireTime && new Date() > new Date(st.expireTime)) {
+      if (!st.userId && (new Date() - SHORT_EXPIRT_TIME) > new Date(st.create_time)) {
         await ShortService.deleteShort({ id: st.id });
-        await rd.del(`short:${short}`);
+        await rd.del(`short:${st.short}`);
         ctx.app.emit('error', shortIsExpire, ctx);
         return false;
       }

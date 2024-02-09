@@ -1,5 +1,4 @@
 const Redis = require('ioredis');
-const cron = require('node-cron');
 const UserService = require('../service/user.service');
 const ShortService = require('../service/short.service');
 
@@ -11,23 +10,6 @@ const redisClient = new Redis({
   db: 0,
 });
 
-cron.schedule('*/10 * * * *', async () => {
-  // 这里是你要执行的任务代码
-  console.log('短链同步中...');
-  await getKeys('short:*')
-    .then((keys) => {
-      keys.forEach(async (key) => {
-        const shortInfo = await getObj(key);
-        ShortService.updateShort(
-          { visitCount: shortInfo.visitCount },
-          shortInfo.id
-        );
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-});
 
 // 获取所有keys
 async function getKeys(reg) {
@@ -50,6 +32,7 @@ async function setObj(key, value) {
   return redisClient.set(key, JSON.stringify(value));
 }
 
+redisClient.getKeys = getKeys
 redisClient.getObj = getObj
 redisClient.setObj = setObj
 

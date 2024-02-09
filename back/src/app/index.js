@@ -8,6 +8,8 @@ const createRetHandler = require('./retHandler');
 
 const errHandler = require('./errHandler');
 
+require('@/db/db_cron')
+
 const app = new Koa();
 
 app.use(cors())

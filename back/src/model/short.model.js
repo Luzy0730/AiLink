@@ -37,11 +37,6 @@ const Short = seq.define(
       type: DataTypes.STRING(8),
       comment: '访问密码'
     },
-    expireTime: {
-      field: 'expire_time',
-      type: DataTypes.DATE,
-      comment: '过期时间',
-    },
   },
   {
     createdAt: 'create_time',

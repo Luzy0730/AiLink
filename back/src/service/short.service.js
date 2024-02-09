@@ -1,4 +1,9 @@
 const ShortModel = require('../model/short.model');
+const seq = require('@/db/db_sequ');
+const rd = require('@/db/db_redis');
+const { Op } = require('sequelize');
+const { SHORT_EXPIRT_TIME } = require('@/config/config_default');
+
 class ShortService {
   async getShortInfo({ id, url, short }, where = {}) {
     const whereOpt = {};
@@ -13,13 +18,7 @@ class ShortService {
     const { short, url, password, userId } = option;
     const fieldOpt = { short, url };
     password && Object.assign(fieldOpt, { password });
-    if (userId) {
-      Object.assign(fieldOpt, { userId });
-    } else {
-      let now = new Date();
-      let expireTime = new Date(now.getTime() + 30 * 60000);
-      Object.assign(fieldOpt, { expireTime });
-    }
+    userId && Object.assign(fieldOpt, { userId });
     const res = await ShortModel.create(fieldOpt);
     return res ? res.dataValues : null;
   }
@@ -27,6 +26,21 @@ class ShortService {
     const { id } = option;
     const res = await ShortModel.destroy({ where: { id } });
     return res;
+  }
+  async deleteExpireShort() {
+    let expireTime = new Date().getTime() - SHORT_EXPIRT_TIME;
+    const ret = await seq.transaction(async (transaction) => {
+      try {
+        const shorts = await ShortModel.findAll({ where: { create_time: { [Op.lt]: expireTime } }, transaction });
+        await Promise.all(shorts.map(async ({ id, short }) => {
+          await ShortModel.destroy({ where: { id }, transaction });
+        }))
+      } catch (error) {
+        await transaction.rollback();
+        throw error
+      }
+    })
+    return ret
   }
   async updateShort({ visitCount }, id) {
     const fieldOpt = {};

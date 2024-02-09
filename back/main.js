@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 const app = require('./src/app/index');
 
 const { APP_PORT } = require('./src/config/config_default');

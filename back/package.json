@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "_moduleAliases": {
+    "@": "./src"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -18,6 +21,7 @@
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^12.0.1",
     "koa2-cors": "^2.0.6",
+    "module-alias": "^2.2.3",
     "murmurhash-js": "^1.0.0",
     "mysql2": "^3.6.5",
     "node-cron": "^3.0.3",
