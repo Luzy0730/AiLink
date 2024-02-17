@@ -125,10 +125,10 @@ const validateAllowSignInCode = async (ctx, next) => {
   try {
     // 账户是否已存在
     const ret = await UserService.getUserInfo({ username });
-    if (ret && mode === 0) {
+    if (ret && mode == 0) {
       ctx.app.emit('error', userIsAlreayExist, ctx);
       return;
-    } else if (!ret) {
+    } else if (!ret && mode == 1) {
       ctx.app.emit('error', userIsNotExist, ctx);
       return;
     }
