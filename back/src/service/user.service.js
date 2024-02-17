@@ -1,4 +1,5 @@
 const UserModel = require('../model/user.model');
+
 class userService {
   async getUserInfo({ id, username }, where = {}) {
     const whereOpt = {};
@@ -9,9 +10,11 @@ class userService {
     return res ? res.dataValues : null;
   }
   async register(option) {
-    const { username, password } = option;
-    const fieldOpt = { username, password };
-    const res = await UserModel.create(fieldOpt);
+    const { username, password, id } = option;
+    const whereOpt = {};
+    id && Object.assign(whereOpt, { id });
+    const fieldOpt = id ? { password } : { username, password };
+    const res = await UserModel[id ? 'update' : 'create'](fieldOpt, { where: whereOpt });
     return res ? res.dataValues : null;
   }
 }

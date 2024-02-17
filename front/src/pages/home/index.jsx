@@ -1,10 +1,15 @@
 import React, { memo, useState } from 'react'
+import { useSelector, shallowEqual } from 'react-redux';
 import { HomeWrapper } from './style'
 import { LockOutlined } from '@ant-design/icons';
 import { createShort } from '@/apis/short'
 import Result from './c-cpns/result/index';
 import { Input, Button } from 'antd';
 const Home = memo(() => {
+
+  const { token } = useSelector(state => ({
+    token: state.user.token,
+  }), shallowEqual)
 
   const [dlInfo, setDlInfo] = useState({
     isShow: false,
@@ -36,7 +41,6 @@ const Home = memo(() => {
         password: res.data.password ? res.data.password : undefined,
         isShow: true,
       }))
-      console.log(dlInfo)
     }).catch(err => { }).finally(() => {
       enterLoading(0, false)
     })
@@ -56,8 +60,8 @@ const Home = memo(() => {
           {dlInfo.isShow && <Result dlInfo={dlInfo} closeResult={closeResult} />}
         </div>
         <div className='extra'>
-          <Input value={shortParams.short} onChange={(event) => setShortParams({ ...shortParams, short: event.target.value })} addonBefore="http://dl.onlycub.top/" placeholder="自定义链接（可选）" />
-          <Input value={shortParams.password} onChange={(event) => setShortParams({ ...shortParams, password: event.target.value })} addonBefore={<LockOutlined />} placeholder="密码（可选）" />
+          <Input value={shortParams.short} onChange={(event) => setShortParams({ ...shortParams, short: event.target.value })} addonBefore="http://dl.onlycub.top/" disabled={!token} placeholder={`自定义链接（${token ? '可选' : '登录后可使用'}）`} />
+          <Input value={shortParams.password} onChange={(event) => setShortParams({ ...shortParams, password: event.target.value })} addonBefore={<LockOutlined />} disabled={!token} placeholder={`密码（${token ? '可选' : '登录后可使用'}）`} />
         </div>
       </div>
       <div className='ad'>
@@ -73,34 +77,28 @@ const Home = memo(() => {
               <img src={require('assets/img/1.png')} alt='链接缩短' />
               <div className='item-right'>
                 <h4 className='item-right_title'>链接缩短</h4>
-                <p className='item-right_content'>将原始网页链接快速生成短链接，美
-                  化链接，减少链接所占字数，便于短
-                  信营销、分渠道传播。</p>
+                <p className='item-right_content'>将原始网页链接快速生成短链接，美化链接，减少链接所占字数，便于短信营销、分渠道传播。</p>
               </div>
             </div>
             <div className='display-item'>
               <img src={require('assets/img/2.png')} alt='永久有效' />
               <div className='item-right'>
                 <h4 className='item-right_title'>永久有效</h4>
-                <p className='item-right_content'>无需担心过期失效，生成的短链接永
-                  久有效。</p>
+                <p className='item-right_content'>无需担心过期失效，生成的短链接永久有效。</p>
               </div>
             </div>
             <div className='display-item'>
               <img src={require('assets/img/3.png')} alt='随时修改' />
               <div className='item-right'>
                 <h4 className='item-right_title'>随时修改</h4>
-                <p className='item-right_content'>短链接跳转的原始链接随时可修改，
-                  投放工作不再受到约束。</p>
+                <p className='item-right_content'>短链接跳转的原始链接随时可修改，投放工作不再受到约束。</p>
               </div>
             </div>
             <div className='display-item'>
               <img src={require('assets/img/4.png')} alt='随机跳转' />
               <div className='item-right'>
                 <h4 className='item-right_title'>随机跳转</h4>
-                <p className='item-right_content'>多个原始链接转为一条短链，访问者随
-                  机跳转不同的网址，随机、记忆两种跳
-                  转模式让AB测试、广告投放更容易。</p>
+                <p className='item-right_content'>多个原始链接转为一条短链，访问者随机跳转不同的网址，随机、记忆两种跳转模式让AB测试、广告投放更容易。</p>
               </div>
             </div>
           </div>
@@ -110,7 +108,7 @@ const Home = memo(() => {
           <div className='flex-center'>
             <ol>
               <li>支持账户查询历史所有短链。</li>
-              <li>支持<b>月限额定数量</b>及<b>无限期额定数量</b>计费方式</li>
+              {/* <li>支持<b>月限额定数量</b>及<b>无限期额定数量</b>计费方式</li> */}
               <li>支持<b>加密短链</b>，提高安全性。</li>
               <li><b>自定义短链后缀</b>，更具个性化。</li>
             </ol>

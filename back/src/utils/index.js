@@ -11,6 +11,19 @@ function string10to62(n) {
   return result;
 }
 
+function stringCode() {
+
+  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const length = 7;
+  let randomString = '';
+
+  for (let i = 0; i < length; i++) {
+    randomString += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return randomString
+}
+
 module.exports = {
   string10to62,
+  stringCode
 };

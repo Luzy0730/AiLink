@@ -4,7 +4,7 @@ const Short = seq.define(
   'short',
   {
     short: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(16),
       allowNull: false,
       unique: true,
       comment: '短链地址中的key',
@@ -37,6 +37,13 @@ const Short = seq.define(
       type: DataTypes.STRING(8),
       comment: '访问密码'
     },
+    isEver: {
+      field: 'is_ever',
+      type: DataTypes.TINYINT(4),
+      allowNull: false,
+      defaultValue: 0,
+      comment: '状态 1: 永久 0：正常',
+    }
   },
   {
     createdAt: 'create_time',

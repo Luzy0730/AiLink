@@ -33,11 +33,34 @@ export const LoginModalWrapper = styled.div`
       padding: 0;
     }
     button:first-child {
+      display: none;
       align-self: flex-start;
     }
     button:nth-child(2) {
       margin: 15px 0 10px;
       height: 42px;
+    }
+    button:nth-child(3),
+    button:nth-child(4) {
+      display: none;
+    }
+    &.sign {
+      button:first-child {
+        display: block;
+      }
+      button:nth-child(4) {
+        display:block ;
+      }
+    }
+    &.login {
+      button:nth-child(3) {
+        display:block ;
+      }
+    }
+    &.reset {
+      button:nth-child(3) {
+        display:block ;
+      }
     }
   }
 `

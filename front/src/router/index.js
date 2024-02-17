@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import Home from '@/pages/home/index.jsx';
 import Link from '@/pages/link/index.jsx';
 const routes = [

@@ -9,6 +9,7 @@ const createRetHandler = require('./retHandler');
 const errHandler = require('./errHandler');
 
 require('@/db/db_cron')
+require('@/db/db_redis')
 
 const app = new Koa();
 

@@ -24,7 +24,7 @@ const Protected = memo(() => {
         <div className='content'>
           <Input value={pwd} onChange={event => setPwd(event.target.value)} onKeyDown={handleKeyDown} placeholder="请输入密码" addonAfter={<LockOutlined />} />
           <p>由
-            <a href="/" target="_blank" rel="noreferrer">「AiLink」</a>
+            <a href="/" target="_blank" rel="noreferrer">「DLink」</a>
             提供网址跳转及数据统计服务</p>
         </div>
       </Card>

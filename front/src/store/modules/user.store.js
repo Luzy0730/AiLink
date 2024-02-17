@@ -2,18 +2,27 @@ import { createSlice } from '@reduxjs/toolkit'
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    showLoginModal: false,
-    isLoginMode: true,
+    showUserModal: false,
+    // 1: 注册 2：登录 3：重置
+    userModalMode: 1,
+    token: '',
+    userInfo: null
   },
   reducers: {
-    setShowLoginModal(state, action) {
-      state.showLoginModal = action.payload;
+    setShowUserModal(state, action) {
+      state.showUserModal = action.payload;
     },
-    setIsLoginMode(state, action) {
-      state.isLoginMode = action.payload;
+    setUserModalMode(state, action) {
+      state.userModalMode = action.payload;
     },
+    setToken(state, action) {
+      state.token = action.payload
+    },
+    setUserInfo(state, action) {
+      state.userInfo = action.payload
+    }
   }
 })
 
-export const { setShowLoginModal, setIsLoginMode } = userSlice.actions
+export const { setShowUserModal, setUserModalMode, setToken, setUserInfo } = userSlice.actions
 export default userSlice.reducer

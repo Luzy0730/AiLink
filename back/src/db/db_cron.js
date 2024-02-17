@@ -7,19 +7,6 @@ const { SHORT_EXPIRT_TIME } = require('@/config/config_default');
 cron.schedule('0 * * * *', async () => {
   console.log(`CRON:1h:清理过期短链:${new Date()}`)
   ShortService.deleteExpireShort()
-  let expireTime = new Date().getTime() - SHORT_EXPIRT_TIME;
-  redis.getKeys('short:*')
-    .then((keys) => {
-      keys.forEach(async (key) => {
-        const shortInfo = await redis.getObj(key);
-        if (expireTime > new Date(shortInfo.create_time)) {
-          redis.del(key);
-        }
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 });
 
 // 每十分钟短链同步
@@ -29,10 +16,7 @@ cron.schedule('*/10 * * * *', async () => {
     .then((keys) => {
       keys.forEach(async (key) => {
         const shortInfo = await redis.getObj(key);
-        ShortService.updateShort(
-          { visitCount: shortInfo.visitCount },
-          shortInfo.id
-        );
+        ShortService.updateShort(shortInfo, shortInfo.id);
       });
     })
     .catch((error) => {

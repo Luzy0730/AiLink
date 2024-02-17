@@ -29,11 +29,11 @@ seq
     console.log('数据库连接失败', err);
   });
 
-seq.sync({ force: true, alter: true })
-  .then(() => {
-    console.log('数据库同步完成');
-  })
-  .catch((error) => {
-    console.error('数据库同步失败:', error);
-  });
+// seq.sync({ force: true, alter: true })
+//   .then(() => {
+//     console.log('数据库同步完成');
+//   })
+//   .catch((error) => {
+//     console.error('数据库同步失败:', error);
+//   });
 module.exports = seq;

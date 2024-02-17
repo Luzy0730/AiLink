@@ -28,8 +28,12 @@ async function getObj(key) {
   return redisClient.get(key).then((res) => JSON.parse(res));
 }
 
-async function setObj(key, value) {
-  return redisClient.set(key, JSON.stringify(value));
+async function setObj(key, value, extime) {
+  if (extime) {
+    return redisClient.set(key, JSON.stringify(value), 'EX', extime);
+  } else {
+    return redisClient.set(key, JSON.stringify(value));
+  }
 }
 
 redisClient.getKeys = getKeys

@@ -6,7 +6,7 @@ const NotFound = memo(() => {
     <NotFoundWrapper>
       <img src={require('assets/img/404.png')} alt="" />
       <p>由
-        <a href="/" target="_blank" rel="noreferrer">「AiLink」</a>
+        <a href="/" target="_blank" rel="noreferrer">「DLink」</a>
         提供网址跳转及数据统计服务</p>
     </NotFoundWrapper>
   )

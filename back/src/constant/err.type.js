@@ -1,10 +1,10 @@
 module.exports = {
-  shortFormateError: {
+  paramsFormateError: {
     code: '10000',
     message: '参数不能为空',
     data: null,
   },
-  userFormateError: {
+  userparamsFormateError: {
     code: '10000',
     message: '用户名或密码不能为空',
     data: null,
@@ -31,7 +31,7 @@ module.exports = {
   },
   shortIsNotExist: {
     code: '10004',
-    message: '不存在指定short的短链',
+    message: '短链不存在',
     data: null,
   },
   userIsNotExist: {
@@ -47,6 +47,11 @@ module.exports = {
   shortDefedIsExist: {
     code: '10009',
     message: '自定义短链已被占用',
+    data: null,
+  },
+  codeHasAlreadySend: {
+    code: '10009',
+    message: '验证码已发送,请1分钟后再试',
     data: null,
   },
 };

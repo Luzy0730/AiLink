@@ -1,15 +1,22 @@
 import React, { memo, useEffect, useState } from 'react'
 import { EyeOutlined, LockOutlined, CopyOutlined, CloseOutlined } from '@ant-design/icons';
-import { Button, QRCode, message } from 'antd';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { Button, QRCode, App } from 'antd';
+import { setShowUserModal, setUserModalMode } from '@/store/modules/user.store'
 import { ResultWrapper } from './style';
 
 const Result = memo((props) => {
+  const dispatch = useDispatch()
+  const { token } = useSelector(state => ({
+    token: state.user.token,
+  }), shallowEqual)
+  const { message } = App.useApp()
   const { dlInfo, closeResult } = props
   const [short, setShort] = useState()
   const handleCopy = () => {
     const sl = `短链接：${short}`
     const pw = dlInfo.password ? `\n密码：${dlInfo.password}` : ''
-    const bz = '\n来自AiLink的分享'
+    const bz = '\n来自DLink的分享'
     const textToCopy = `${sl}${pw}${bz}`
     if (navigator.clipboard) {
       navigator.clipboard.writeText(textToCopy)
@@ -28,11 +35,15 @@ const Result = memo((props) => {
       textArea.remove();
       message.success('已复制到粘贴板');
     }
+  }
 
+  const handleLogin = () => {
+    dispatch(setUserModalMode(2))
+    dispatch(setShowUserModal(true))
   }
 
   useEffect(() => {
-    setShort(`${window.location.origin}/#/${dlInfo.short}`)
+    setShort(`${window.location.origin}/${dlInfo.short}`)
   }, [dlInfo])
 
   return (
@@ -54,12 +65,10 @@ const Result = memo((props) => {
           <p className="origin-link" title={dlInfo.url}>原始链接：{dlInfo.url}</p>
         </div>
       </div>
-      {
-        dlInfo.hasExpire && <div className='result_bottom'>
-          <p>注意：此短链接有效期 <b>30分钟</b>，登录后永久有效并可查看完整访问数据</p>
-          <Button type="primary">免费使用</Button>
-        </div>
-      }
+      <div className='result_bottom'>
+        <p>注意：此短链接有效期 <b>30分钟</b>，{!token ? '登录后' : '个人中心'}可设置永久有效并可查看完整访问数据。</p>
+        {!token && <Button type="primary" onClick={handleLogin}>免费使用</Button>}
+      </div>
     </ResultWrapper>
   )
 })
