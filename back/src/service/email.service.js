@@ -10,12 +10,12 @@ class emailService {
   async sendMail(mailMsg = {}) {
     // 创建传输器对象
     const transporter = nodemailer.createTransport({
-      host: 'smtp.qiye.aliyun.com',
+      host: 'smtp.exmail.qq.com',
       port: 465,
       secure: true, // use SSL
       auth: {
         user: 'admin@onlycub.top',
-        pass: 'ledMDy0zFvswJ9rw',
+        pass: 'r7ZyBkEGHHfdLHkg',
       },
     });
     // 配置邮件内容
